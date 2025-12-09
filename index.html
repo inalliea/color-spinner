@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Color Spinner</title>
+  <style>
+    body {
+      background-color: #ffcce6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    #container {
+      text-align: center;
+    }
+
+    #spinBtn {
+      background: white;
+      border: none;
+      padding: 15px 32px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    #spinBtn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Spin animation */
+    .spinning {
+      animation: spin 1s ease;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(360deg) scale(1.1); }
+      100% { transform: rotate(720deg) scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <button id="spinBtn">Get Random Color</button>
+  </div>
+
+  <script>
+    const button = document.getElementById('spinBtn');
+
+    button.addEventListener('click', () => {
+      // Add spin animation
+      button.classList.add('spinning');
+
+      // After animation ends, remove the class so it can re-trigger
+      setTimeout(() => {
+        button.classList.remove('spinning');
+
+        // Generate a random color
+        const randomColor = "#" + Math.floor(Math.random()*16777215).toString(16);
+
+        // Change page background to random color
+        document.body.style.backgroundColor = randomColor;
+
+      }, 1000); // matches animation time
+    });
+  </script>
+
+</body>
+</html>
